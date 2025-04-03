@@ -1,0 +1,36 @@
+#include <iostream> 
+#include <vector>
+using namespace std;
+
+struct Product { int id; string name; double price; };
+
+void displayProducts(const vector<Product>& products) { cout << "\nAvailable Products:" << endl; for (const auto& product : products) { cout << product.id << ". " << product.name << " - $" << product.price << endl; } }
+
+double calculateTotal(const vector<Product>& products, const vector<int>& cart) { double total = 0; for (int id : cart) { total += products[id - 1].price; } return total; }
+
+int main() { vector<Product> products = { {1, "Laptop", 999.99}, {2, "Smartphone", 499.99}, {3, "Headphones", 79.99}, {4, "Mouse", 29.99} };
+
+vector<int> cart;
+int choice;
+
+do {
+    displayProducts(products);
+    cout << "\nEnter product ID to add to cart (0 to checkout): ";
+    cin >> choice;
+    
+    if (choice > 0 && choice <= products.size()) {
+        cart.push_back(choice);
+        cout << products[choice - 1].name << " added to cart." << endl;
+    } else if (choice != 0) {
+        cout << "Invalid choice. Please try again." << endl;
+    }
+    
+} while (choice != 0);
+
+cout << "\nTotal cost: $" << calculateTotal(products, cart) << endl;
+cout << "Thank you for shopping!" << endl;
+
+return 0;
+
+}
+
