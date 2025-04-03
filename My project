@@ -1,7 +1,6 @@
 #include <iostream> 
 #include <vector>
 using namespace std;
-
 struct Product { int id; string name; double price; };
 
 void displayProducts(const vector<Product>& products) { cout << "\nAvailable Products:" << endl; for (const auto& product : products) { cout << product.id << ". " << product.name << " - $" << product.price << endl; } }
